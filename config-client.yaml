@@ -1,0 +1,33 @@
+spring:
+    profiles:
+     active: test        
+---
+
+spring:
+    profiles: dev
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: localhost1
+  client:
+    register-with-eureka: false #是否将服务信息注册到eureka，由于这个服务是作为eureka的服务端，所以选择false，默认值为true；
+    fetch-registry: false #是否可以从注册中心拿到注册信息，false则表示不能，因为这是作为注册中心
+    service-url:
+      defaultZone: http://eureka7002:7002/eureka,http://eureka7003:7003/eureka #集群配置，关联其他服务端集群
+---
+
+spring:
+    profiles: test
+server:
+  port: 7002
+
+eureka:
+  instance:
+    hostname: localhost1
+  client:
+    register-with-eureka: false #是否将服务信息注册到eureka，由于这个服务是作为eureka的服务端，所以选择false，默认值为true；
+    fetch-registry: false #是否可以从注册中心拿到注册信息，false则表示不能，因为这是作为注册中心
+    service-url:
+      defaultZone: http://eureka7002:7002/eureka,http://eureka7003:7003/eureka #集群配置，关联其他服务端集群
